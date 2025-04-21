@@ -5,6 +5,10 @@ using Presistance;
 using Presistance.Data;
 using Services;
 using Services.Abstractions;
+using System.Threading.Tasks;
+using Services.MappingProfiles;
+using AssemblyMapping = Services.AssemblyReference;
+
 
 namespace Store.G02.Api
 {
@@ -35,9 +39,12 @@ namespace Store.G02.Api
 
             builder.Services.AddScoped<IUnitOfWork , UnitOfWork>();
 
-            builder.Services.AddAutoMapper(typeof(AssmblyReference).Assembly);
+            builder.Services.AddAutoMapper(typeof(AssemblyMapping).Assembly);
+
+            ////builder.Services.AddAutoMapper(typeof(ProductProfile).Assembly);
 
             builder.Services.AddScoped<IServiceManager, ServiceManager>();
+
 
 
 
@@ -61,6 +68,9 @@ namespace Store.G02.Api
                 app.UseSwagger();
                 app.UseSwaggerUI();
             }
+            
+            app.UseStaticFiles();
+
 
             app.UseHttpsRedirection();
 
